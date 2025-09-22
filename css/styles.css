@@ -1,5 +1,8 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
 body{
     background: #f5f5f5;
+    overflow-x: hidden;
 }
 
 #form{
@@ -38,3 +41,92 @@ body{
     transform: translateY(-8px);
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
+.item-vehiculo .card img{
+    border-bottom: 4px solid #1abc9c;
+    height: 250px;
+}
+
+.item-vehiculo .card-body h2,h3,h4{
+    font-size: 18px;
+    color: black;
+}
+
+.item-vehiculo .card-body h2.text-success{
+    color: #1abc9c !important;
+    font-size: 30px;
+    text-align: center;
+}
+
+.item-vehiculo .card-body button.btn-success{
+    background: #1abc9c;
+    border: none;
+}
+
+.row.principal{
+    margin-top: 50px;
+}
+
+#carrito{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    border: none;
+    background: transparent;
+}
+
+#carrito i{
+  font-size: 40px;
+  color: #1abc9c;
+}
+
+.panel{
+    
+    width: 400px;
+    padding: 20px 20px 20px 24px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #bdbdbd;
+    background: white;
+    position: absolute;
+    top: 0;
+    right: -800px;
+}
+
+.panel h2.titulo{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.panel .tarjeta-panel img{
+    width: 150px;
+}
+
+.panel .tarjeta-panel h2{
+    font-size: 14px;
+}
+
+.panel .tarjeta-panel{
+    box-shadow: 0 0 10px #bdbdbd;
+    border-radius: 10px;
+    width: 350px;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.panel .tarjeta-panel .info{
+    margin-top: 1px;
+    padding: 0;
+    padding-left: 70px;
+    padding-top: 10px;
+}
+
+.panel .tarjeta-panel button{
+    font-size: 10px;
+    margin-left: 70px;
+    margin-top: -10px;
+}
+

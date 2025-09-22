@@ -36,7 +36,7 @@ function crearVehiculo(imagenV,titulo1,sMarca,modeloV,kVehiculo,pVehiculo){
     titulo.textContent = titulo1
 
     const marca = document.createElement('h4');
-    marca.classList.add('card-subtitle', 'text-muted')
+    marca.classList.add('card-text')
     marca.textContent = sMarca;
 
     const  modelo = document.createElement('h4');
