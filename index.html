@@ -52,7 +52,7 @@
 
                     <!-- Precio -->
                     <div class="mb-3">
-                        <label for="precio" class="form-label">Precio ($)</label>
+                        <label for="precio" class="form-label">Precio</label>
                         <input id="precio" type="number" class="form-control"  placeholder="Ej: 50000000">
                     </div>
 
@@ -75,7 +75,7 @@
                                 <h4 class="card-text">Kilometraje: 35,000 km</h4>
                                 <h2 class="text-success">$50,000,000</h2>
                                 <div class="d-flex justify-content-between mt-3">
-                                    <button class="btn btn-success">Agregar</button>
+                                    <button id="btnAgregar" class="btn btn-success">Agregar</button>
                                     <button class="btn btn-danger">Eliminar</button>
                                 </div>
                             </div>
@@ -87,7 +87,8 @@
 
             <button id="carrito"><i class="bi bi-cart4"></i></button>
         </div>
-        <div class="row panel">
+        <div class="row panel" id="panel">
+            <button id="ocultar" class="btn btn-danger">X</button>
             <h2 class="titulo">Carrito</h2>
             <div class="row tarjeta-panel">
                 <div class="col-md-4">
@@ -107,41 +108,8 @@
                 </div>
             </div>
 
-            <div class="row tarjeta-panel">
-                <div class="col-md-4">
-                    <img src="https://www.buyatoyota.com/sharpr/bat/assets/img/vehicle-info/Corolla/2026/hero-image.png" alt="">
-                </div>
-                <div class="col-md-5 info">
-                    <h2>Toyota</h2>
-                    <h2>Txl</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>$200.000.000</h2>
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-danger">X</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row tarjeta-panel">
-                <div class="col-md-4">
-                    <img src="https://www.buyatoyota.com/sharpr/bat/assets/img/vehicle-info/Corolla/2026/hero-image.png" alt="">
-                </div>
-                <div class="col-md-5 info">
-                    <h2>Toyota</h2>
-                    <h2>Txl</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>$200.000.000</h2>
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-danger">X</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
         </div>
     </section>
 

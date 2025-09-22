@@ -7,6 +7,7 @@ const iKilometraje = document.getElementById('kilometraje');
 const iPrecio = document.getElementById('precio');
 const form = document.getElementById('vehiculo-form');
 const card = document.getElementById('cont-cardss');
+const iPanel = document.getElementById('panel');
 
 //CREAMOS LA FUNCION QUE NOS PERMITE CREAR UNA NUEVA TAREA A PARTIR DEL FORMULARIO
 //TODA ETIQUETA QUE VAMOS A CREAR ES APARTIR DE LA MAQUETA HTML PRE-EXISTENTE
@@ -58,21 +59,16 @@ function crearVehiculo(imagenV,titulo1,sMarca,modeloV,kVehiculo,pVehiculo){
     // CREO LOS HIJOS DEL CUARTO CONTENEDOR PADRE
     const comprar = document.createElement('button');
     comprar.classList.add('btn', 'btn-success');
-    comprar.textContent = 'Comprar';
+    comprar.textContent = 'Agregar';
 
     const eliminar = document.createElement('button');
     eliminar.classList.add('btn', 'btn-danger');
     eliminar.textContent = 'Eliminar';
 
-    // ELIMINAOS LA TARJETA
-    eliminar.addEventListener('click', ()=>{
-        pPrincipal.remove();
-    });
+    
 
     // MUESTRA UN MENSAJE AL DAR CLICK EN EL BOTON COMPRAR
-    comprar.addEventListener('click', ()=>{
-        alert('Te contactaremos muy pronto');
-    });
+   
 
     //ENSAMBLAMOS DENTRO DE LOS NODOS PADRES SUS NODOS HIJOS
     pPrincipal.appendChild(pCard);
@@ -113,7 +109,9 @@ form.addEventListener('submit', (e)=>{
     if(titulo1=='' || sMarca=='' || modeloV=='' || kVehiculo=='' || pVehiculo==''){
         alert('Registre todos los campos')
     }else{
+       
         const newVehiculo = crearVehiculo(imagenV,titulo1,sMarca,modeloV,kVehiculo,pVehiculo);
+        eventsVehicles(newVehiculo);
         card.appendChild(newVehiculo);
         iFoto.value='';
         iNombres.value='';
@@ -124,3 +122,106 @@ form.addEventListener('submit', (e)=>{
     }
 
 });
+
+function eventsVehicles(pPrincipal){
+
+    const btnEliminar = pPrincipal.querySelector('.btn-danger');
+    const btnAgregar = pPrincipal.querySelector('.btn-success');
+
+    // ELIMINAOS LA TARJETA
+    btnEliminar.addEventListener('click', ()=>{
+        pPrincipal.remove();
+    });
+
+    btnAgregar.addEventListener('click',()=>{
+
+        
+        const imagenPanel = pPrincipal.querySelector('img').getAttribute('src');
+        const marcaPanel = pPrincipal.querySelector('.card-title').textContent;
+        const modeloPanel = pPrincipal.querySelector('.card-text').textContent;
+        const precioPanel = pPrincipal.querySelector('.text-success').textContent;
+
+        const newPanel = agregarPanel(imagenPanel,marcaPanel,modeloPanel,precioPanel);
+        iPanel.appendChild(newPanel);
+
+        
+    });
+
+    
+
+    
+
+    
+
+}
+
+const carrito = document.getElementById('carrito');
+const ocultar = document.getElementById('ocultar')
+const panel = document.querySelector('.panel');
+
+carrito.addEventListener('click',()=>{
+    panel.classList.toggle('activo')
+});
+
+ocultar.addEventListener('click',()=>{
+    panel.classList.toggle('activo')
+});
+
+
+
+
+// AGREGAR VEHICULOS AL PANEL
+function agregarPanel(imagenV,sMarca,modeloV,pVehiculo){
+    // CREO EL NODO PRINCIPAL
+    const pTarjeta = document.createElement('div');
+    pTarjeta.classList.add('row', 'tarjeta-panel')
+
+    // CREO LOS HIJOS
+    const pImagen = document.createElement('div');
+    pImagen.classList.add('col-md-4');
+
+    const imagenP = document.createElement('img');
+    imagenP.setAttribute('src', imagenV);
+
+    const pInfo = document.createElement('div');
+    pInfo.classList.add('col-md-5', 'info');
+
+    const mCarro = document.createElement('h2');
+    mCarro.textContent = sMarca;
+
+    const modeloCarro = document.createElement('h2');
+    modeloCarro.textContent = modeloV;
+
+    const pCuarto = document.createElement('div');
+    pCuarto.classList.add('row');
+
+    const pQuinto = document.createElement('div');
+    pQuinto.classList.add('col-md-6');
+
+    const cPrecio = document.createElement('h2');
+    cPrecio.textContent = '$'+ pVehiculo;
+
+    const pSexto = document.createElement('div');
+    pSexto.classList.add('col-md-6');
+
+    const bElimnar = document.createElement('button');
+    bElimnar.classList.add('btn', 'btn-danger', 'dangers');
+    bElimnar.textContent = 'X';
+
+    // ENMSAMBLAMOS DENTRO DE LOS NODOS PADRES SUS NODOJS HIJOS
+    pTarjeta.appendChild(pImagen);
+    pImagen.appendChild(imagenP);
+    pTarjeta.appendChild(pInfo);
+    pInfo.appendChild(mCarro);
+    pInfo.appendChild(modeloCarro);
+    pInfo.appendChild(pCuarto);
+    pCuarto.appendChild(pQuinto);
+    pQuinto.appendChild(cPrecio);
+    pCuarto.appendChild(pSexto);
+    pSexto.appendChild(bElimnar);
+
+    return pTarjeta;
+
+
+};
+
