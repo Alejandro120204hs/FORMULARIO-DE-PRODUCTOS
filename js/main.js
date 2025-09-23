@@ -8,6 +8,7 @@ const iPrecio = document.getElementById('precio');
 const form = document.getElementById('vehiculo-form');
 const card = document.getElementById('cont-cardss');
 const iPanel = document.getElementById('panel');
+let totalPrecio = 0;
 
 //CREAMOS LA FUNCION QUE NOS PERMITE CREAR UNA NUEVA TAREA A PARTIR DEL FORMULARIO
 //TODA ETIQUETA QUE VAMOS A CREAR ES APARTIR DE LA MAQUETA HTML PRE-EXISTENTE
@@ -127,6 +128,7 @@ function eventsVehicles(pPrincipal){
 
     const btnEliminar = pPrincipal.querySelector('.btn-danger');
     const btnAgregar = pPrincipal.querySelector('.btn-success');
+   
 
     // ELIMINAOS LA TARJETA
     btnEliminar.addEventListener('click', ()=>{
@@ -141,11 +143,18 @@ function eventsVehicles(pPrincipal){
         const modeloPanel = pPrincipal.querySelector('.card-text').textContent;
         const precioPanel = pPrincipal.querySelector('.text-success').textContent;
 
+         const precio = parseFloat(precioPanel.replace(/[$,]/g, ''));
+
         const newPanel = agregarPanel(imagenPanel,marcaPanel,modeloPanel,precioPanel);
         iPanel.appendChild(newPanel);
 
+       
+        totalPrecio+=precio;
+        mostrarTotal();
         
     });
+
+    
 
     
 
@@ -208,6 +217,15 @@ function agregarPanel(imagenV,sMarca,modeloV,pVehiculo){
     bElimnar.classList.add('btn', 'btn-danger', 'dangers');
     bElimnar.textContent = 'X';
 
+    bElimnar.addEventListener('click',()=>{
+        const precioTexto = cPrecio.textContent;
+        const precioNumero = parseFloat(precioTexto.replace(/[$,]/g, ''));
+        
+        pTarjeta.remove();
+        totalPrecio -= precioNumero;
+        mostrarTotal();
+    })
+
     // ENMSAMBLAMOS DENTRO DE LOS NODOS PADRES SUS NODOJS HIJOS
     pTarjeta.appendChild(pImagen);
     pImagen.appendChild(imagenP);
@@ -224,4 +242,10 @@ function agregarPanel(imagenV,sMarca,modeloV,pVehiculo){
 
 
 };
+
+function mostrarTotal(){
+    const totalC = document.getElementById('total');
+    totalC.textContent = 'Precio total: $'+ totalPrecio;
+
+}
 
