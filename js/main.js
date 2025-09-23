@@ -128,6 +128,7 @@ function eventsVehicles(pPrincipal){
 
     const btnEliminar = pPrincipal.querySelector('.btn-danger');
     const btnAgregar = pPrincipal.querySelector('.btn-success');
+    const contenedorCarrito = document.getElementById('contenedor-carrito');
    
 
     // ELIMINAOS LA TARJETA
@@ -146,7 +147,7 @@ function eventsVehicles(pPrincipal){
          const precio = parseFloat(precioPanel.replace(/[$,]/g, ''));
 
         const newPanel = agregarPanel(imagenPanel,marcaPanel,modeloPanel,precioPanel);
-        iPanel.appendChild(newPanel);
+        contenedorCarrito.appendChild(newPanel);
 
        
         totalPrecio+=precio;
