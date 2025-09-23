@@ -209,7 +209,7 @@ function agregarPanel(imagenV,sMarca,modeloV,pVehiculo){
     pQuinto.classList.add('col-md-6');
 
     const cPrecio = document.createElement('h2');
-    cPrecio.textContent = '$'+ pVehiculo;
+    cPrecio.textContent = pVehiculo;
 
     const pSexto = document.createElement('div');
     pSexto.classList.add('col-md-6');
