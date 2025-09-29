@@ -144,7 +144,19 @@ function eventsVehicles(pPrincipal){
         const modeloPanel = pPrincipal.querySelector('.card-text').textContent;
         const precioPanel = pPrincipal.querySelector('.text-success').textContent;
 
-         const precio = parseFloat(precioPanel.replace(/[$,]/g, ''));
+        const precio = parseFloat(precioPanel.replace(/[$,]/g, ''));
+
+        //  ALIMENTAMOS EL OBJETO
+        const nuevoCarro = {
+            imagen:imagenPanel,
+            marca:marcaPanel,
+            modelo:modeloPanel,
+            precio:precioPanel
+        }
+
+        const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+        carritoGuardado.push(nuevoCarro);
+        localStorage.setItem('carrito',JSON.stringify(carritoGuardado));
 
         const newPanel = agregarPanel(imagenPanel,marcaPanel,modeloPanel,precioPanel);
         contenedorCarrito.appendChild(newPanel);
@@ -152,16 +164,10 @@ function eventsVehicles(pPrincipal){
        
         totalPrecio+=precio;
         mostrarTotal();
+
+        
         
     });
-
-    
-
-    
-
-    
-
-    
 
 }
 
