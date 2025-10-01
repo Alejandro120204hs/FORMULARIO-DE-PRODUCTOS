@@ -1,7 +1,7 @@
 const tablaBody = document.querySelector('#tabla-carros tbody');
 
 document.addEventListener('DOMContentLoaded',()=>{
-    const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+    const carritoGuardado = JSON.parse(localStorage.getItem('vehiculosCard')) || [];
     carritoGuardado.forEach((vehiculo)=>{
         const fila = document.createElement('tr');
         const tdImagen = document.createElement('td');

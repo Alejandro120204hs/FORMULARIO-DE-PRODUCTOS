@@ -109,20 +109,39 @@ form.addEventListener('submit', (e)=>{
 
     if(titulo1=='' || sMarca=='' || modeloV=='' || kVehiculo=='' || pVehiculo==''){
         alert('Registre todos los campos')
+        return;
     }else{
        
         const newVehiculo = crearVehiculo(imagenV,titulo1,sMarca,modeloV,kVehiculo,pVehiculo);
+
+        // ALIMENTAMOS EL OBJETO CON SUS DIFERENTES CLAVES Y VALORES
+        const nuevoVehiculo = {
+            imagen:imagenV,
+            titulo:titulo1,
+            marca:sMarca,
+            modelo:modeloV,
+            kilometraje:kVehiculo,
+            precio:pVehiculo
+        };
+        const vehiculosGuardados = JSON.parse(localStorage.getItem('vehiculos')) || [];
+        vehiculosGuardados.push(nuevoVehiculo);
+        localStorage.setItem('vehiculos', JSON.stringify(vehiculosGuardados));
+
+
         eventsVehicles(newVehiculo);
         card.appendChild(newVehiculo);
-        iFoto.value='';
-        iNombres.value='';
-        iMarca.value='';
-        iModelo.value='';
-        iKilometraje.value='';
-        iPrecio.value='';
+
+       
+
+        form.reset();
     }
 
 });
+
+
+
+
+
 
 function eventsVehicles(pPrincipal){
 
@@ -140,25 +159,14 @@ function eventsVehicles(pPrincipal){
 
         
         const imagenPanel = pPrincipal.querySelector('img').getAttribute('src');
-        const marcaPanel = pPrincipal.querySelector('.card-title').textContent;
+        const tituloPanel = pPrincipal.querySelector('.card-title').textContent;
+        const marcaPanel = pPrincipal.querySelector('.card-text').textContent;
         const modeloPanel = pPrincipal.querySelector('.card-text').textContent;
+        const kilometrajePanel = pPrincipal.querySelector('.card-text').textContent;
         const precioPanel = pPrincipal.querySelector('.text-success').textContent;
 
         const precio = parseFloat(precioPanel.replace(/[$,]/g, ''));
-
-        //  ALIMENTAMOS EL OBJETO
-        const nuevoCarro = {
-            imagen:imagenPanel,
-            marca:marcaPanel,
-            modelo:modeloPanel,
-            precio:precioPanel
-        }
-
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-        carritoGuardado.push(nuevoCarro);
-        localStorage.setItem('carrito',JSON.stringify(carritoGuardado));
-
-        const newPanel = agregarPanel(imagenPanel,marcaPanel,modeloPanel,precioPanel);
+        const newPanel = agregarPanel(imagenPanel,tituloPanel,marcaPanel,modeloPanel,kilometrajePanel,precioPanel);
         contenedorCarrito.appendChild(newPanel);
 
        
@@ -186,8 +194,10 @@ ocultar.addEventListener('click',()=>{
 
 
 
+
+
 // AGREGAR VEHICULOS AL PANEL
-function agregarPanel(imagenV,sMarca,modeloV,pVehiculo){
+function agregarPanel(imagenV,titulo1,sMarca,modeloV,kVehiculo,pVehiculo){
     // CREO EL NODO PRINCIPAL
     const pTarjeta = document.createElement('div');
     pTarjeta.classList.add('row', 'tarjeta-panel')
@@ -245,14 +255,61 @@ function agregarPanel(imagenV,sMarca,modeloV,pVehiculo){
     pCuarto.appendChild(pSexto);
     pSexto.appendChild(bElimnar);
 
+    const nuevoVehiculoCrad = {
+        imagen:imagenV,
+        titulo:titulo1,
+        marca:sMarca,
+        modelo:modeloV,
+        kilometraje:kVehiculo,
+        precio:pVehiculo
+    }
+
+    const vehiculosGuardadosCard = JSON.parse(localStorage.getItem('vehiculosCard')) || [];
+    // AGREGAMOS AL ARREGLO CURSOS GUARDADOS EL NUEVO CURSO [] EL CURSO {} 
+    vehiculosGuardadosCard.push(nuevoVehiculoCrad);
+    localStorage.setItem('vehiculosCard', JSON.stringify(vehiculosGuardadosCard));
+
     return pTarjeta;
 
 
 };
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+    const vehiculoCreado = JSON.parse(localStorage.getItem('vehiculos')) || [];
+    vehiculoCreado.forEach((vehiculo)=>{
+        const cardVehiculo = crearVehiculo(
+            vehiculo.imagen,
+            vehiculo.titulo,
+            vehiculo.marca,
+            vehiculo.modelo,
+            vehiculo.kilometraje,
+            vehiculo.precio
+        );
+        eventsVehicles(cardVehiculo);
+        card.appendChild(cardVehiculo);
+    });
+
+    const panelCarritoCreado = JSON.parse(localStorage.getItem('vehiculosCard')) || [];
+    panelCarritoCreado.forEach((carrito)=>{
+        const panelCarrito= agregarPanel(
+            carrito.imagen,
+            carrito.titulo,
+            carrito.marca,
+            carrito.modelo,
+            carrito.kilometraje,
+            carrito.precio
+        );
+        eventsVehicles(panelCarrito);
+        iPanel.appendChild(panelCarrito);
+    });
+    
+});
 
 function mostrarTotal(){
     const totalC = document.getElementById('total');
     totalC.textContent = 'Precio total: $'+ totalPrecio;
 
 }
+
 
